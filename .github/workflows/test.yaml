@@ -24,4 +24,4 @@ jobs:
             ~/.m2
           key: build-cache-2-with-scala_${{ matrix.scala }}
       - name: Run DocModule tests
-        run: build/sbt "++ ${{ matrix.scala }}" DocModule/test
+        run: sbt "++ ${{ matrix.scala }}" DocModule/test

@@ -41,6 +41,7 @@ lazy val DocModule = (project in file("DocModule"))
       (JavaUnidoc / unidoc / unidocAllSources).value
         // exclude internal classes
         .map(_.filterNot(_.getCanonicalPath.contains("/internal/")))
+        .map(_.filterNot(_.getCanonicalPath.contains("\\internal\\")))
     },
     // Ensure unidoc is run with tests. Must be cleaned before test for unidoc to be generated.
     (Test / test) := ((Test / test) dependsOn (Compile / unidoc)).value
