@@ -1,0 +1,27 @@
+name: DocTests Tests"
+on: [push, pull_request]
+jobs:
+  build:
+    name: "Run tests"
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        scala: [2.11.12]
+    steps:
+      - uses: actions/checkout@v2
+      - name: install java
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: '8'
+      - name: Cache Scala, SBT
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.sbt
+            ~/.ivy2
+            ~/.cache/coursier
+            ~/.m2
+          key: build-cache-2-with-scala_${{ matrix.scala }}
+      - name: Run DocModule tests
+        run: build/sbt "++ ${{ matrix.scala }}" DocModule/test
