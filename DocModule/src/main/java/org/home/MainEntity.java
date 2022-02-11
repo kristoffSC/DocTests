@@ -10,7 +10,7 @@ public class MainEntity {
     private static final String MSG = "HELLO WORLD";
 
     /**
-     * Delegates print request to decorated entity.
+     * Delegates print request to decorated entity. Uses {@link HideEntity}
      * @param entity Message to print
      */
     public void callPrint(HideEntity entity) {
